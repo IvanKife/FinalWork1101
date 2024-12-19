@@ -1,0 +1,44 @@
+﻿<Window x:Class="FragrantWorldWPF.MainWindow"
+            xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Ароматный Мир)" Height="600" Width="900" Icon="icon.ico"
+         MinWidth="950" MinHeight="375">
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+            <TextBlock Text="Производитель:" VerticalAlignment="Center" Margin="0,0,5,0"/>
+            <ComboBox x:Name="ManufacturerComboBox" Width="150" SelectionChanged="FilterChanged" />
+
+            <TextBlock Text="Цена от:" VerticalAlignment="Center" Margin="10,0,5,0"/>
+            <TextBox x:Name="MinPriceTextBox" Width="80" TextChanged="FilterChanged" />
+
+            <TextBlock Text="до:" VerticalAlignment="Center" Margin="5,0,5,0"/>
+            <TextBox x:Name="MaxPriceTextBox" Width="80" TextChanged="FilterChanged" />
+
+            <RadioButton x:Name="AscendingRadioButton" Content="Возрастание" GroupName="SortOrder" Margin="10,0,5,0" Checked="SortOrderChanged"/>
+            <RadioButton x:Name="DescendingRadioButton" Content="Убывание" GroupName="SortOrder" Margin="5,0,10,0" Checked="SortOrderChanged"/>
+
+            <TextBlock Text="Поиск:" VerticalAlignment="Center" Margin="10,0,5,0"/>
+            <TextBox x:Name="SearchTextBox" Width="150" TextChanged="FilterChanged" />
+        </StackPanel>
+        <TextBlock x:Name="CountTextBlock" Grid.Row="1" Margin="0,0,0,10"  />
+        <ListBox x:Name="ProductsListBox" Grid.Row="2" ScrollViewer.HorizontalScrollBarVisibility="Disabled"  >
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Margin="5">
+                        <TextBlock Text="{Binding ProductName}" FontWeight="Bold" FontSize="14"/>
+                        <TextBlock Text="{Binding ProductDescription}" TextWrapping="Wrap" Margin="0,2"/>
+                        <TextBlock Text="Производитель: " FontWeight="Bold"  Margin="0,2"  ><Run Text="{Binding ProductManufacturer}" FontStyle="Italic"/></TextBlock>
+                        <TextBlock Text="{Binding ProductCost, StringFormat=C}" FontWeight="Bold" Margin="0,2"/>
+                        <Button Content="Заказать" Margin="0,5,0,0"  />
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+    </Grid>
+</Window>
